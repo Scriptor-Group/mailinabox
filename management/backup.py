@@ -283,9 +283,9 @@ def perform_backup(full_backup):
 			if quit:
 				sys.exit(code)
 
-	service_command("php7.2-fpm", "stop", quit=True)
-	service_command("postfix", "stop", quit=True)
-	service_command("dovecot", "stop", quit=True)
+	# service_command("php7.2-fpm", "stop", quit=True)
+	# service_command("postfix", "stop", quit=True)
+	# service_command("dovecot", "stop", quit=True)
 
 	# Execute a pre-backup script that copies files outside the homedir.
 	# Run as the STORAGE_USER user, not as root. Pass our settings in

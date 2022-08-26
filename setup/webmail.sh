@@ -132,10 +132,12 @@ cat > $RCM_CONFIG <<EOF;
    ),
  );
 \$config['support_url'] = 'https://mailinabox.email/';
-\$config['product_name'] = '$PRIMARY_HOSTNAME Webmail';
+\$config['skin_logo'] = 'https://chat-pictures-prod.s3.fr-par.scw.cloud/48d45ebe-f37f-435f-8b5f-1781d629628e';
+\$config['htmleditor'] = 4;
+\$config['product_name'] = 'Mail Clavus.io';
 \$config['cipher_method'] = 'AES-256-CBC'; # persistent login cookie and potentially other things
 \$config['des_key'] = '$SECRET_KEY'; # 37 characters -> ~256 bits for AES-256, see above
-\$config['plugins'] = array('html5_notifier', 'archive', 'zipdownload', 'password', 'managesieve', 'jqueryui', 'persistent_login', 'carddav');
+\$config['plugins'] = array('html5_notifier', 'archive', 'zipdownload', 'password', 'managesieve', 'jqueryui', 'persistent_login'/* , 'carddav'*/);
 \$config['skin'] = 'elastic';
 \$config['login_autocomplete'] = 2;
 \$config['login_username_filter'] = 'email';
@@ -145,25 +147,25 @@ cat > $RCM_CONFIG <<EOF;
 EOF
 
 # Configure CardDav
-cat > ${RCM_PLUGIN_DIR}/carddav/config.inc.php <<EOF;
-<?php
-/* Do not edit. Written by Mail-in-a-Box. Regenerated on updates. */
-\$prefs['_GLOBAL']['hide_preferences'] = true;
-\$prefs['_GLOBAL']['suppress_version_warning'] = true;
-\$prefs['ownCloud'] = array(
-	 'name'         =>  'ownCloud',
-	 'username'     =>  '%u', // login username
-	 'password'     =>  '%p', // login password
-	 'url'          =>  'https://${PRIMARY_HOSTNAME}/cloud/remote.php/carddav/addressbooks/%u/contacts',
-	 'active'       =>  true,
-	 'readonly'     =>  false,
-	 'refresh_time' => '02:00:00',
-	 'fixed'        =>  array('username','password'),
-	 'preemptive_auth' => '1',
-	 'hide'        =>  false,
-);
-?>
-EOF
+# cat > ${RCM_PLUGIN_DIR}/carddav/config.inc.php <<EOF;
+# <?php
+# /* Do not edit. Written by Mail-in-a-Box. Regenerated on updates. */
+# \$prefs['_GLOBAL']['hide_preferences'] = true;
+# \$prefs['_GLOBAL']['suppress_version_warning'] = true;
+# \$prefs['ownCloud'] = array(
+# 	 'name'         =>  'ownCloud',
+# 	 'username'     =>  '%u', // login username
+# 	 'password'     =>  '%p', // login password
+# 	 'url'          =>  'https://${PRIMARY_HOSTNAME}/cloud/remote.php/carddav/addressbooks/%u/contacts',
+# 	 'active'       =>  true,
+# 	 'readonly'     =>  false,
+# 	 'refresh_time' => '02:00:00',
+# 	 'fixed'        =>  array('username','password'),
+# 	 'preemptive_auth' => '1',
+# 	 'hide'        =>  false,
+# );
+# ?>
+# EOF
 
 # Create writable directories.
 mkdir -p /var/log/roundcubemail /var/tmp/roundcubemail $STORAGE_ROOT/mail/roundcube
