@@ -39,10 +39,10 @@ VERSION=1.5.2
 HASH=208ce4ca0be423cc0f7070ff59bd03588b4439bf
 PERSISTENT_LOGIN_VERSION=59ca1b0d3a02cff5fa621c1ad581d15f9d642fe8
 HTML5_NOTIFIER_VERSION=68d9ca194212e15b3c7225eb6085dbcf02fd13d7 # version 0.6.4+
-CARDDAV_VERSION=4.3.0
-CARDDAV_HASH=4ad7df8843951062878b1375f77c614f68bc5c61
+# CARDDAV_VERSION=4.3.0
+# CARDDAV_HASH=4ad7df8843951062878b1375f77c614f68bc5c61
 
-UPDATE_KEY=$VERSION:$PERSISTENT_LOGIN_VERSION:$HTML5_NOTIFIER_VERSION:$CARDDAV_VERSION
+UPDATE_KEY=$VERSION:$PERSISTENT_LOGIN_VERSION:$HTML5_NOTIFIER_VERSION
 
 # paths that are often reused.
 RCM_DIR=/usr/local/lib/roundcubemail
@@ -82,14 +82,14 @@ if [ $needs_update == 1 ]; then
 	git_clone https://github.com/kitist/html5_notifier.git $HTML5_NOTIFIER_VERSION '' ${RCM_PLUGIN_DIR}/html5_notifier
 
 	# download and verify the full release of the carddav plugin
-	wget_verify \
-		https://github.com/blind-coder/rcmcarddav/releases/download/v${CARDDAV_VERSION}/carddav-v${CARDDAV_VERSION}.tar.gz \
-		$CARDDAV_HASH \
-		/tmp/carddav.tar.gz
+	# wget_verify \
+	# 	https://github.com/blind-coder/rcmcarddav/releases/download/v${CARDDAV_VERSION}/carddav-v${CARDDAV_VERSION}.tar.gz \
+	# 	$CARDDAV_HASH \
+	# 	/tmp/carddav.tar.gz
 
 	# unzip and cleanup
-	tar -C ${RCM_PLUGIN_DIR} -zxf /tmp/carddav.tar.gz
-	rm -f /tmp/carddav.tar.gz
+	# tar -C ${RCM_PLUGIN_DIR} -zxf /tmp/carddav.tar.gz
+	# rm -f /tmp/carddav.tar.gz
 
 	# record the version we've installed
 	echo $UPDATE_KEY > ${RCM_DIR}/version
@@ -199,9 +199,9 @@ chown root.www-data $STORAGE_ROOT/mail/users.sqlite
 chmod 664 $STORAGE_ROOT/mail/users.sqlite
 
 # Fix Carddav permissions:
-chown -f -R root.www-data ${RCM_PLUGIN_DIR}/carddav
+# chown -f -R root.www-data ${RCM_PLUGIN_DIR}/carddav
 # root.www-data need all permissions, others only read
-chmod -R 774 ${RCM_PLUGIN_DIR}/carddav
+# chmod -R 774 ${RCM_PLUGIN_DIR}/carddav
 
 # Run Roundcube database migration script (database is created if it does not exist)
 ${RCM_DIR}/bin/updatedb.sh --dir ${RCM_DIR}/SQL --package roundcube
